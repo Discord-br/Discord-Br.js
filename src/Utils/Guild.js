@@ -4,7 +4,17 @@ const Emoji = require("./Emoji");
 const MemberGuild = require("./MemberGuild");
 const Role = require("./Role");
 
+/**
+ * Informação dos Servidores
+ * @class {Guild}
+ */
+
 module.exports = class Guild {
+         /**
+            * @constructor
+            * @param {object} options - informações do Servidor
+        */
+       
     _client;
     entrou;
     quantidadeMembros;

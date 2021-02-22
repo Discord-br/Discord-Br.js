@@ -1,4 +1,12 @@
+/**
+ * Informação dos canais
+ * @extends {Map}
+ */
 module.exports = class Collection extends Map {
+        /**
+            * @constructor
+            * @param {object} options - informações do canal
+        */
     constructor(base, limit){
         super()
 

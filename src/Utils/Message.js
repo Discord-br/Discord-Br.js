@@ -1,7 +1,17 @@
 const { throws } = require("assert");
 const User = require("../Utils/User");
 
+/**
+ * Dados de uma mensagem
+ * @class {Message}
+ */
+
 module.exports = class Message {
+        /**
+            * @constructor
+            * @param {object} options - Dados de uma mensagem
+        */
+
     constructor(data, client) {
         this._client = client;
         this.tipo = data.type || 0

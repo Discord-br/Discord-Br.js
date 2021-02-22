@@ -1,6 +1,14 @@
+/**
+ * Informação dos membros de um servidor
+ * @class {Guild}
+ */
 module.exports = class data {
+        /**
+            * @constructor
+            * @param {object} options - Informação dos membros de um servidor
+        */
+       
     constructor(client, data) {
-        //console.log(data)
         this._client = client
         this.entrouEm = data.joined_at
         this.cargos = data.roles

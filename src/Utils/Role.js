@@ -1,4 +1,13 @@
+/**
+ * Dados de um cargo
+ * @class {Role}
+ */
+
 module.exports = class Role{
+        /**
+            * @constructor
+            * @param {object} options - Dados de um cargo
+        */
     constructor(client, data){
         this._client = client
 

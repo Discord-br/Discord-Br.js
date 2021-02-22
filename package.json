@@ -9,7 +9,9 @@
   "author": "Bryzzen",
   "license": "MIT",
   "dependencies": {
+    "eslint": "^7.20.0",
     "node-fetch": "^2.6.1",
+    "prettier": "^2.2.1",
     "ws": "^7.4.3"
   },
   "typings": "./index.d.ts",

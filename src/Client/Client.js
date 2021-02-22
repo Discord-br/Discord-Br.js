@@ -9,11 +9,15 @@ const User = require('../Utils/User');
 const Websocket = require('../WebSocket/WebSocketManager');
 
 /**
- * @constructor
- * @param {object} options - configurações do client
+ * A principal parte das interações com a API do discord e o ponto de partida para qualquer bot
+ * @extends {EventEmitter}
  */
 
 module.exports = class Client extends EventEmitter {
+    /**
+ * @constructor
+ * @param {object} options - configurações do client
+ */
     constructor(options = {formatoImagem: "png"||"gif"||"jpeg"||"jpg"||"webp"}) {
         super()
         this.token;
@@ -40,29 +44,70 @@ module.exports = class Client extends EventEmitter {
             avatar: ""
         }
 
+        /**
+            * Coleção de Emojis
+            * @type {Collection}
+        */
         this.emojis = new Collection(Emoji)
 
+        /**
+            * Ping da API
+            * @type {Number}
+        */
         this._ping = 0;
 
+         /**
+            * Coleção de Usuarios
+            * @type {Collection}
+        */
         this.usuarios = new Collection(User)
 
+         /**
+            * Opções 
+            * @type {Object}
+        */
         this.options = Object.assign({
             formatoImagem: "png"||"gif"||"jpeg"||"jpg"||"webp"
         }, options)
-
-        this.online = false;
 
         if (this.options && this.options.formatoImagem && !["png", "gif", "jpeg", "jpg", "webp"].includes(this.options.formatoImagem)) {
             throw new Error("Formato de Imagem errado!")
         }
 
+         /**
+            * Está ativo? 
+            * @type {Boolean}
+        */
+        this.online = false;
+
+        /**
+            * Tempo ativo
+            * @type {Number}
+        */
         this.startTime = 0;
+
+         /**
+            * Coleção de servidores
+            * @type {Collection}
+        */
         this.servidores = new Collection(Guild);
 
+        /**
+            * Pré-Guilds
+            * @type {Array}
+        */
         this._preguilds = []
 
+         /**
+            * Coleção de servidores
+            * @type {Collection}
+        */
         this.cargos = new Collection(Role)
 
+         /**
+            * Utils
+            * @type {Object}
+        */
         this.utils = {
             msToDate: async function(time) {
                 time = Math.round(time / 1000);
@@ -82,18 +127,33 @@ module.exports = class Client extends EventEmitter {
         
     }
 
+        /**
+            * Pronto?
+            * @type {Boolean}
+        */
     set ready(aa){
         this.online = aa;
     }
-    
+            /**
+            * Ping da API
+            * @type {Number}
+        */
     get ping(){
         return this._ping
     }
 
+        /**
+            * Ping da API
+            * @type {Number}
+        */
     set ping(ping){
         this._ping = ping
     }
 
+        /**
+            * Envia uma mensagem
+            * @type {Object}
+        */
     async enviarMensagem(id = "", content){
         
         if(typeof content == "string"){
@@ -103,7 +163,10 @@ module.exports = class Client extends EventEmitter {
               })
         }
     }
-
+        /**
+            * Procura uma mensagem
+            * @type {Object}
+        */
     async FetchMessage(id = "", body = {}){
         const userAgent = `DiscordBot (https://github.com/Discord-br/Discord-Br.js, ${require("../../package.json").version})`;
         let res = ""
@@ -131,11 +194,17 @@ module.exports = class Client extends EventEmitter {
         })
     }
 
-
+        /**
+            * Online?
+            * @type {Boolean}
+        */
     get ready(){
         return this.online
     }
-
+        /**
+            * Execulta o Login
+            * @type {Function}
+        */
     async logar(token) {
         if (!token || typeof token !== "string") throw new Error("Token Inválido!");
         this.token = token = token.replace(/^(Bot|Bearer)\s*/i, '');
@@ -145,19 +214,31 @@ module.exports = class Client extends EventEmitter {
         ws.connect(this.token)
     }
 
-
+        /**
+            * Tempo Online
+            * @type {Number}
+        */
     get tempoOn() {
         return Date.now() - this.startTime
     }
-
+        /**
+            * Token do Bot
+            * @type {String}
+        */
     get chave() {
         return this.token
     }
-
+        /**
+            * Informações do user
+            * @type {Object}
+        */
     set eu(user) {
         this._user = user
     }
-
+        /**
+            * Informações do user
+            * @type {Object}
+        */
     get eu() {
         return this._user
     }
