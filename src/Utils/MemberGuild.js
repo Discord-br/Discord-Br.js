@@ -19,7 +19,7 @@ module.exports = class data {
         })
         const total = this.permissions.reduce((total, cE) => parseInt(total) + parseInt(cE))
 
-        this.nickname = data.nick || data.user.username
+        this.apelido = data.nick || data.user.username
 
         this.permissions = total.toString()
     }

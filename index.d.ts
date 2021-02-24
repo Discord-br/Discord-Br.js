@@ -6,7 +6,6 @@ interface options {
 }
 
 declare function DiscordBr(options?: options): DiscordBr.Client;
-
 declare namespace DiscordBr {
     interface autor {
         nome: string,
@@ -37,6 +36,7 @@ declare namespace DiscordBr {
     interface Message {
         tipo: string;
         criado: number;
+        embed?: Embed | EmbedOptions;
         conteudo: string;
         servidorID: string;
         canalID: string;
@@ -91,6 +91,71 @@ declare namespace DiscordBr {
         come(obj: object): void;
         get(id: string): void;
     }
+
+    interface EmbedOptions {
+        titulo?: string;
+        descrição?: string;
+        url?: string;
+        cor?: ColorResolvable;
+        autor?: Partial<EmbedAuthor> & { icon_url?: string; proxy_icon_url?: string };
+        miniimg?: Partial<EmbedThumbnail> & { proxy_url?: string };
+        imagem?: Partial<EmbedImage> & { proxy_url?: string };
+        rodape?: Partial<EmbedFooter> & { icon_url?: string; proxy_icon_url?: string };
+    }
+
+    interface Embed{
+        constructor(data?: Embed | EmbedOptions);
+        public autor: EmbedAuthor | null;
+        public cor: string | number | null;
+        public readonly createdAt: Date | null;
+        public descrição: string | null;
+        public rodape: EmbedFooter | null;
+        public readonly hexColor: string | null;
+        public imagem: EmbedImage | null;
+        public readonly length: number;
+        public miniimg: EmbedThumbnail | null;
+        public titulo: string | null;
+        public url: string | null;
+        
+        public setarAutor(nome: StringResolvable, iconURL?: string, url?: string): this;
+        public setarCor(cor: ColorResolvable): this;
+        public setarDescription(descrição: StringResolvable): this;
+        public setarRodape(text: StringResolvable, iconURL?: string): this;
+        public setarImagem(url: string): this;
+        public setarMiniimg(url: string): this;
+        public setarTitulo(titulo: StringResolvable): this;
+        public setarURL(url: string): this;
+    }
+
+    interface EmbedThumbnail {
+        url: string;
+        proxyURL?: string;
+        height?: number;
+        width?: number;
+    }
+
+    interface EmbedAuthor {
+        nome?: string;
+        url?: string;
+        iconURL?: string;
+        proxyIconURL?: string;
+    }
+
+    interface EmbedFooter {
+        text?: string;
+        iconURL?: string;
+        proxyIconURL?: string;
+    }
+
+    interface EmbedImage {
+        url: string;
+        proxyURL?: string;
+        height?: number;
+        width?: number;
+    }
+
+    type StringResolvable = string | string[] | any;
+    type ColorResolvable = string | string[] | any;
 
     export class Client extends EventEmitter {
         eu: ClientUser;
