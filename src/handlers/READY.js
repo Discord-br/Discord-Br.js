@@ -1,5 +1,4 @@
 const Guild = require("../Utils/Guild")
-
 /**
  * Evento gerado a partir do momento que a aplicação está online
  * @function {Ready}

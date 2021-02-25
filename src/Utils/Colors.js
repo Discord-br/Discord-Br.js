@@ -1,4 +1,4 @@
-exports.Colors = {
+module.exports = {
     DEFAULT: 0x000000,
     WHITE: 0xffffff,
     AQUA: 0x1abc9c,
