@@ -7,7 +7,8 @@ const Message = require('../Utils/Message');
 const Role = require('../Utils/Role');
 const User = require('../Utils/User');
 const Websocket = require('../WebSocket/WebSocketManager');
-
+const atividade = require('../Utils/Activity')
+const presenca = require('../Utils/Prescence')
 /**
  * A principal parte das interações com a API do discord e o ponto de partida para qualquer bot
  * @extends {EventEmitter}
@@ -43,7 +44,10 @@ module.exports = class Client extends EventEmitter {
             flags: 0,
             avatar: ""
         }
-
+        this.presencas = {
+            atividade,
+            presenca
+        }
         /**
             * Coleção de Emojis
             * @type {Collection}
@@ -62,6 +66,7 @@ module.exports = class Client extends EventEmitter {
         */
         this.usuarios = new Collection(User)
 
+        this.websocket = Websocket
          /**
             * Opções 
             * @type {Object}
@@ -108,6 +113,7 @@ module.exports = class Client extends EventEmitter {
             * Utils
             * @type {Object}
         */
+       
         this.utils = {
             msToDate: async function(time) {
                 time = Math.round(time / 1000);

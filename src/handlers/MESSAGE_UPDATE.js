@@ -5,5 +5,5 @@ const Message = require("../Utils/Message");
  * @function {MessageUpdate}
  */
 module.exports = async function(client, payload) {  
-    return client.emit("mensagem", await new Message(payload.d, client));
+    return client.emit("mensagem", new Message(payload.d, client));
  }

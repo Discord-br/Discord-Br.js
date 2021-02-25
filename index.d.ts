@@ -17,6 +17,21 @@ declare namespace DiscordBr {
         clientstatus: object,
         activities: object[];
     }
+    interface activities {
+        nome: string,
+        id: string,
+        tipo: string,
+        url: string
+        detalhes: object,
+        estado: string
+        appID: string
+        horario: object,
+        party: boolean,
+        assets: object,
+        emoji: object,
+        syncID: string,
+        criadoEm: string;
+    }
 
     interface member {
         cargos: Role;

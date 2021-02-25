@@ -1,4 +1,4 @@
-const Colors = require('./Colors');
+const { Colors } = require('./Constants');
 
 module.exports = class Util {
     constructor() {}
