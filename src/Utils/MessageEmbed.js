@@ -87,5 +87,5 @@ module.exports = class Embed {
         this.url = url;
         return this;
     }
-
+  }
 }

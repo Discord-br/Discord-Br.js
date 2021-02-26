@@ -106,7 +106,6 @@ declare namespace DiscordBr {
         come(obj: object): void;
         get(id: string): void;
     }
-
     interface EmbedOptions {
         titulo?: string;
         descrição?: string;
@@ -171,6 +170,17 @@ declare namespace DiscordBr {
 
     type StringResolvable = string | string[] | any;
     type ColorResolvable = string | string[] | any;
+
+    interface Embed{
+        setarTitulo: string;
+        setarDescrição: string;
+        setarCor: string;
+        setarAutor: string;
+        setarImagem: string;
+        setarMiniImg: string;
+        setarRodape: string;
+        setarURL: string;
+    }
 
     export class Client extends EventEmitter {
         eu: ClientUser;
