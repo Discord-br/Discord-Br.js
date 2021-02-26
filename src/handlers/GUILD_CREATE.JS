@@ -3,6 +3,10 @@ const Guild = require("../Utils/Guild")
 const Role = require("../Utils/Role")
 const User = require("../Utils/User")
 
+/**
+ * Evento gerado a partir da Criação de um servidor
+ * @function {GuildCreate}
+ */
 module.exports =  function(client, payload) {
   const d = payload.d
 

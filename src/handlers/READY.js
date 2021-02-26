@@ -1,5 +1,8 @@
 const Guild = require("../Utils/Guild")
-
+/**
+ * Evento gerado a partir do momento que a aplicação está online
+ * @function {Ready}
+ */
 module.exports =  function(client, payload) {
   const d = payload.d
 

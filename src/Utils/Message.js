@@ -1,6 +1,3 @@
-const { throws } = require("assert");
-const User = require("../Utils/User");
-
 module.exports = class Message {
     constructor(data, client) {
         this._client = client;
@@ -11,13 +8,11 @@ module.exports = class Message {
         this.canalID = data.channel_id || "";
         this.id = data.id
         this.servidor = client.servidores.get(this.servidorID)
-        if (data.author) {
-            this.autor = this._client.usuarios.get(data.author.id)
-        }
-
-        if (data.member) {
-            this.membro = this.servidor.membros.get(data.author.id)
-        }
+        data.author ?
+        this.autor = this._client.usuarios.get(data.author.id) :
+        data.member ?
+        this.membro = this.servidor.membros.get(data.author.id) :
+        null
     }
 
     async responder(content = "") {
@@ -34,6 +29,22 @@ module.exports = class Message {
 
             const fetch = require("node-fetch")
 
+
+                let data;
+
+                typeof content === "string"
+            ?
+                data = JSON.stringify({ content: content, tts: false, message_reference: { message_id: this.id, guild_id: this.servidorID } })
+            :
+                typeof content === "object" 
+            ?
+                data = JSON.stringify({embed: content, tts: false, message_reference: { message_id: this.id, guild_id: this.servidorID } })
+            : 
+                null
+            
+
+            fetch(`https://discord.com/api/v8/channels/${this.canalID}/messages`, {
+
             let data;
 
             if(typeof content === "string"){
@@ -45,9 +56,10 @@ module.exports = class Message {
   
             }
             fetch("https://discord.com" + "/api/v8" + "/channels/" + `${this.canalID}/messages`, {
+
                 method: "POST",
                 body: data,
-                headers: headers
+                headers
             }).then(res => res.json())
                 .then(json => {
                     res = new Message(json, this._client)

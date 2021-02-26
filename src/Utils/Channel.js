@@ -1,4 +1,13 @@
+/**
+ * Informação dos canais
+ * @class {Channel}
+ */
 module.exports = class Channel{
+
+        /**
+            * @constructor
+            * @param {object} options - informações do canal
+        */
     constructor(client, data){
         this.tipo = data.type
         this.topico = data.topic || ""

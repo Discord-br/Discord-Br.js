@@ -1,6 +1,14 @@
+/**
+ * Informação dos membros de um servidor
+ * @class {Guild}
+ */
 module.exports = class data {
+        /**
+            * @constructor
+            * @param {object} options - Informação dos membros de um servidor
+        */
+       
     constructor(client, data) {
-        //console.log(data)
         this._client = client
         this.entrouEm = data.joined_at
         this.cargos = data.roles
@@ -11,7 +19,7 @@ module.exports = class data {
         })
         const total = this.permissions.reduce((total, cE) => parseInt(total) + parseInt(cE))
 
-        this.nickname = data.nick || data.user.username
+        this.apelido = data.nick || data.user.username
 
         this.permissions = total.toString()
     }
